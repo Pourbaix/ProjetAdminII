@@ -1,5 +1,5 @@
 $TTL  604800
-@        IN    SOA     ns.l2-5.ephec-ti.be. kouetcheu.ephec.be (
+@        IN    SOA     ns.l2-5.ephec-ti.be. kouetcheu.l2-5.ephec-ti.be(
                                   2021060809         ; Serial
                                   43200      ; Refresh
                                   7100      ; Retry
