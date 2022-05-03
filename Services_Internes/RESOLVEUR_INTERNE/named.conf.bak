@@ -11,7 +11,7 @@ options {
         };
 
         listen-on {
-                127.0.0.1;//localhost
+                127.0.0.1;
                 192.168.0.1;//remplacer par adresse du VPS
         };
 
@@ -27,23 +27,23 @@ options {
 		
 };
 
-//zone "127.in-addr.arpa" IN {
-//        type master;
-//        file "pri/127.zone";
-//       allow-update { none; };
-//        notify no;
-//};
+zone "127.in-addr.arpa" IN {
+        type master;
+        file "pri/127.zone";
+        allow-update { none; };
+        notify no;
+};
 
 // Zone interne qui envoie les requetes au SOA
 zone "intranet.ephec-ti.be"{
         type forward;
-        forwarders {192.168.0.3;};//remplacer par adresse du VPS
+        forwarders {192.168.0.3;};
         forward only;
 };
 
 // Zone reverse qui envoie les requetes inverse au SOA
 zone "0.168.192.in-addr.arpa"{
     type forward;
-    forwarders {192.168.0.3;};//remplacer par adresse du VPS
+    forwarders {192.168.0.3;};
     forward only;
 };
