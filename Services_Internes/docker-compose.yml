@@ -1,0 +1,28 @@
+version: "3.3"
+
+services:
+    soa-interne:
+        build:
+            context: 
+                ./SOA_INTERNE
+            dockerfile: 
+                dockerfile
+        ports:
+            - "53:53"
+        volumes:
+            
+        container_name:
+            soa-interne
+            
+    resolveur-interne:
+        build:
+            context: 
+                ./RESOLVEUR_INTERNE
+            dockerfile:
+                dockerfile
+        ports:
+            - "53:53"
+        volumes:
+            
+        container_name:
+            resolveur-interne
