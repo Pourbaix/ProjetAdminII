@@ -1,12 +1,17 @@
-# On utilise une variable pour stocker les mots de passe
-ARG classic_user
-ARG admin_user
-
 # On prend une image ubuntu comme base
 FROM ubuntu:latest
 
 # On installe ce qu'il faut sur l'image
-RUN apt-get update && apt-get upgrade && apt-get install samba systemctl nano vim -y
+RUN apt-get update \
+  && apt-get install -y \
+  samba \
+  systemctl \
+  nano \
+  vim
+
+# On utilise une variable pour stocker les mots de passe
+ARG classic_user
+ARG admin_user
 
 # On initie les fichiers de partages et le compte linux de l'utilisateur classique
 RUN mkdir -p /home/share
@@ -17,22 +22,25 @@ RUN mkdir /home/share/user1
 RUN chown user1:sambashare /home/share/user1
 RUN chmod 2770 /home/share/user1
 
-RUN classic_user | smbpasswd -a user1
-RUN smbpasswd -e user1
+RUN echo $classic_user | smbpasswd -a user1 & echo $classic_user
 
 # On initie les fichiers de partages et le compte linux de l'utilisateur admin
 RUN useradd -M -d /home/share/smbadmin -s /usr/sbin/nologin -G sambashare smbadmin
 RUN mkdir /home/share/smbadmin
-RUN admin_user | smbpasswd -a smbadmin
-RUN smbpasswd -e smbadmin
+RUN echo $admin_user | smbpasswd -a smbadmin & echo $admin_user
 RUN chown smbadmin:sambashare /home/share/smbadmin
 RUN chmod 2770 /home/share/smbadmin
 
 # On copie le fichier de configuration de samba 
 COPY smb.conf /etc/samba
 
+# IMPORTANT : Exposer les ports qui sont nécessaires au bon fonctionnement du cloud
+EXPOSE 445/TCP
+EXPOSE 139/TCP
+
 # On restart le service samba pour appliquer les modifs
-RUN systemctl restart smbd nmbd
+CMD systemctl start smbd nmbd
+
 
 
 
