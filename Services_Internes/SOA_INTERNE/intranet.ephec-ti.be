@@ -11,6 +11,6 @@ $TTL 86400
 
 
 ns              IN      A               192.168.0.2
-resolv          IN      A               192.168.0.1 //Ip du VPS qui contient les services internes
-db              IN      A               192.168.0.3 //Ip du VPS qui contient les services internes
-cloud 			IN 		A				192.168.0.4 //Ip du VPS qui contient les services internes
+resolv          IN      A               192.168.0.1 
+db              IN      A               192.168.0.3 
+cloud 			IN 		A				192.168.0.4

@@ -2,13 +2,19 @@
 FROM ubuntu:latest
 
 # On installe ce qu'il faut sur l'image
-RUN apt-get update && apt-get upgrade && apt-get install net-tools bind9 bind9-utils dnsutils nano -y
+RUN apt-get update \
+  && apt-get install -y \
+  bind9 \
+  bind9utils \
+  bind9-doc \
+  dnsutils \
+  nano
 
 # On va copier les fichiers de config créer dans l'image 
 COPY named.conf /etc/bind
 COPY intranet.ephec-ti.be /etc/bind
 COPY 0.168.192.in-addr.arpa /etc/bind
-COPY reslov.conf /etc
+COPY resolv.conf /etc
 
 # IMPORTANT : Exposer les ports qui sont nécessaires au bon fonctionnement du service
 EXPOSE 53/TCP

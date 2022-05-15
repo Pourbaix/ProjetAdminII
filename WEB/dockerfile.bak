@@ -4,12 +4,13 @@ RUN apt-get update -y && apt-get install -y nano
 RUN apt-get install -y dnsutils net-tools iputils-ping
 
 COPY /WWW/site_dynamique/index.php /var/www/b2b/index.php
-COPY /SITES_AVAILABLE/ /etc/apache2/sites-available/
+COPY /SITES_AVAILABLE/site-dynamique.conf /etc/apache2/sites-available/b2b.conf
 COPY /WWW/html/index.html /var/www/html/index.html
+COPY /SITES_AVAILABLE/www.conf /etc/apache2/sites-available/www.conf
 
 COPY apache2.conf /etc/apache2/apache2.conf
 
-RUN a2ensite site-dynamique.conf
-RUN a2ensite www.conf
+RUN a2ensite site-dynamique
+RUN a2ensite www
 
 RUN service apache2 start
