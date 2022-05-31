@@ -25,7 +25,7 @@ RUN apt install -y \
 
 
 
-# Installation d'Asterisk + Fail2Ban
+# Installation d'Asterisk 
 WORKDIR /usr/local/src/
 RUN wget http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-18-current.tar.gz
 RUN tar -xvzf asterisk-18-current.tar.gz
