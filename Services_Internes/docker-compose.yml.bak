@@ -51,7 +51,7 @@ services:
             context:
                 ./POSTE
             dockerfile:
-                Dockerfile
+                dockerfile
         networks: 
             atelier_network:
                 ipv4_address: 192.168.4.1
@@ -63,7 +63,7 @@ services:
             context:
                 ./POSTE
             dockerfile:
-                Dockerfile
+                dockerfile
         networks: 
             secretariat_network:
                 ipv4_address: 192.168.5.2
@@ -75,7 +75,7 @@ services:
             context:
                 ./POSTE
             dockerfile:
-                Dockerfile
+                dockerfile
         networks: 
             direction_network:
                 ipv4_address: 192.168.5.1
@@ -87,7 +87,7 @@ services:
             context:
                 ./POSTE
             dockerfile:
-                Dockerfile
+                dockerfile
         networks: 
             commerciaux_network:
                 ipv4_address: 192.168.3.1
@@ -99,13 +99,12 @@ services:
             context:
                 ./POSTE
             dockerfile:
-                Dockerfile
+                dockerfile
         networks: 
             compta_network:
                 ipv4_address: 192.168.2.1
         container_name:
             poste-compta
-            
 networks:
   local_network:
     ipam:

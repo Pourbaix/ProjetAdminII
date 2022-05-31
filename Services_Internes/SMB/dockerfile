@@ -9,10 +9,6 @@ RUN apt-get update \
   nano \
   vim
 
-# On utilise une variable pour stocker les mots de passe
-ARG classic_user
-ARG admin_user
-
 # On initie les fichiers de partages et le compte linux de l'utilisateur classique
 RUN mkdir -p /home/share
 RUN chmod 777 /home/share 
@@ -22,14 +18,17 @@ RUN mkdir /home/share/user1
 RUN chown user1:sambashare /home/share/user1
 RUN chmod 2770 /home/share/user1
 
-RUN echo $classic_user | smbpasswd -a user1 & echo $classic_user
+RUN echo classic123 | smbpasswd -a user1 & echo classic123
+RUN echo classic123 | pdbedit -a user1 & echo classic123
 
 # On initie les fichiers de partages et le compte linux de l'utilisateur admin
 RUN useradd -M -d /home/share/smbadmin -s /usr/sbin/nologin -G sambashare smbadmin
 RUN mkdir /home/share/smbadmin
-RUN echo $admin_user | smbpasswd -a smbadmin & echo $admin_user
 RUN chown smbadmin:sambashare /home/share/smbadmin
 RUN chmod 2770 /home/share/smbadmin
+
+RUN echo adminabc | smbpasswd -a smbadmin & echo adminabc
+RUN echo adminabc | pdbedit -a smbadmin & echo adminabc
 
 # On copie le fichier de configuration de samba 
 COPY smb.conf /etc/samba
@@ -39,7 +38,9 @@ EXPOSE 445/TCP
 EXPOSE 139/TCP
 
 # On restart le service samba pour appliquer les modifs
-CMD systemctl start smbd nmbd
+# CMD service smbd restart 
+
+ENTRYPOINT ["tail", "-f", "/dev/null"]
 
 
 
