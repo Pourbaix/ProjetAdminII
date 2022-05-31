@@ -2,11 +2,8 @@ FROM ubuntu:bionic
 #image ubuntu
 
 #mise a jour image et installation de bind9 
-RUN apt-get update \
-  && apt-get install -y \
-  bind9 \
-  bind9utils \
-  bind9-doc 
+RUN apt update && apt full-upgrade -y && \
+    apt install bind9 bind9utils dnsutils net-tools nano -y
 
 # activation IPv4
 RUN sed -i 's/OPTIONS=.*/OPTIONS="-4 -u bind"/' /etc/default/bind9
@@ -15,8 +12,14 @@ RUN sed -i 's/OPTIONS=.*/OPTIONS="-4 -u bind"/' /etc/default/bind9
 COPY named.conf /etc/bind/ 
 COPY l2-5.ephec-ti.be /etc/bind/ 
 
+
+
 #ouverture du port 53 en udp de image
+EXPOSE 953/tcp
+EXPOSE 953/udp
 EXPOSE 53/udp 
 
+
+
 #demarrage du serveur dns 
-CMD named -g
+CMD ["named", "-c", "/etc/bind/named.conf", "-g"]

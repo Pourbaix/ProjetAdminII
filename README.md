@@ -1,5 +1,5 @@
 # ProjetAdminII:
-Ceci est le git pour notre projet d'administration système et réseaux.
+Ceci est le git pour notre projet d'administration système et réseaux II.
 
 ## Membres du groupe:
 
