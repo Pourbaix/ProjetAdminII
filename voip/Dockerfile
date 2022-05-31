@@ -36,14 +36,12 @@ RUN make install
 RUN make samples
 RUN make config
 
-COPY ./fichiers/users.conf /etc/asterisk/users.conf
-COPY ./fichiers/sip.conf /etc/asterisk/sip.conf
-COPY ./fichiers/extensions.conf /etc/asterisk/extensions.conf
-COPY ./fichiers/voicemail.conf /etc/asterisk/voicemail.conf
-COPY ./fichiers/features.conf /etc/asterisk/features.conf
-COPY ./fichiers/logger.conf /etc/asterisk/logger.conf
-COPY ./fichiers/jail.conf /etc/fail2ban/jail.conf
-COPY ./fichiers/asterisk.conf /etc/fail2ban/filter.d/asterisk.conf
+COPY users.conf /etc/asterisk/users.conf
+COPY sip.conf /etc/asterisk/sip.conf
+COPY extensions.conf /etc/asterisk/extensions.conf
+COPY voicemail.conf /etc/asterisk/voicemail.conf
+COPY features.conf /etc/asterisk/features.conf
+COPY asterisk.conf /etc/fail2ban/filter.d/asterisk.conf
 EXPOSE 5060/udp
 EXPOSE 5060/tcp
 
