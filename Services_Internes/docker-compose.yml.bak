@@ -112,28 +112,34 @@ networks:
       driver: default
       config:
         - subnet: 192.168.0.0/24
+        gateway: 192.168.0.253
   direction_network:
     ipam:
       driver: default
       config:
         - subnet: 192.168.5.0/24
+        gateway: 192.168.5.253
   atelier_network:
     ipam:
       driver: default
       config:
         - subnet: 192.168.1.0/24
+        gateway: 192.168.1.253
   compta_network:
     ipam:
       driver: default
       config:
         - subnet: 192.168.2.0/24
+        gateway: 192.168.2.253
   commerciaux_network:
     ipam:
       driver: default
       config:
         - subnet: 192.168.3.0/24
+        gateway: 192.168.3.253
   secretariat_network:
     ipam:
       driver: default
       config:
         - subnet: 192.168.4.0/24
+        gateway: 192.168.4.253
