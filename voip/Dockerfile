@@ -23,28 +23,18 @@ RUN apt install -y \
   libedit-dev \
   libssl-dev
 
-RUN echo "Europe/Brussels" | tee /etc/timezone
-RUN dpkg-reconfigure --frontend noninteractive tzdata
 
-#Mise en place de SRTP
-COPY ./chiffrage/SRTP/libsrtp-2.3.0 /usr/src/libsrtp-2.3.0
-WORKDIR /usr/src/libsrtp-2.3.0
-RUN ./configure CFLAGS=-fPIC --prefix=/usr
-RUN make
-RUN make install
 
 # Installation d'Asterisk + Fail2Ban
 WORKDIR /usr/local/src/
-RUN wget http://downloads.asterisk.org/pub/telephony/asterisk/old-releases/asterisk-16.9.0.tar.gz
-RUN tar -xvzf asterisk-16.9.0.tar.gz
-WORKDIR /usr/local/src/asterisk-16.9.0/
+RUN wget http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-18-current.tar.gz
+RUN tar -xvzf asterisk-18-current.tar.gz
+WORKDIR /usr/local/src/asterisk-18.6.0/
 RUN ./configure
 RUN make
 RUN make install
 RUN make samples
 RUN make config
-
-RUN apt-get -y install fail2ban
 
 COPY ./fichiers/users.conf /etc/asterisk/users.conf
 COPY ./fichiers/sip.conf /etc/asterisk/sip.conf
@@ -57,12 +47,6 @@ COPY ./fichiers/asterisk.conf /etc/fail2ban/filter.d/asterisk.conf
 EXPOSE 5060/udp
 EXPOSE 5060/tcp
 
-#Mise en place de TLS
-RUN /etc/init.d/fail2ban start
-RUN mkdir /etc/asterisk/keys
-
-
-EXPOSE 19000-20000/udp
 
 #Run asterisk
 CMD ["asterisk", "-f"]
