@@ -1,50 +1,18 @@
-FROM ubuntu:latest
+FROM debian
 
-RUN apt-get update -y
-RUN apt-get install -y net-tools
-RUN apt-get install -y iputils-ping
-RUN apt-get install -y nano
+# Asterisk
+RUN apt-get -y update && apt-get -y upgrade
+RUN apt-get install dnsutils net-tools asterisk -y
 
-# Doc Asterisk : https://doc.ubuntu-fr.org/asterisk
-# Installation des dépendances
-RUN DEBIAN_FRONTEND="noninteractive" apt-get -y install tzdata
-RUN apt install -y \
-  apt-utils \
-  build-essential \
-  wget \
-  openssl \
-  libxml2-dev \
-  libncurses5-dev \
-  uuid-dev \
-  sqlite3 \
-  libsqlite3-dev \
-  pkg-config \
-  libjansson-dev \
-  libedit-dev \
-  libssl-dev
-
-
-
-# Installation d'Asterisk 
-WORKDIR /usr/local/src/
-RUN wget http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-18-current.tar.gz
-RUN tar -xvzf asterisk-18-current.tar.gz
-WORKDIR /usr/local/src/asterisk-18.6.0/
-RUN ./configure
-RUN make
-RUN make install
-RUN make samples
-RUN make config
-
-COPY users.conf /etc/asterisk/users.conf
+# Récupération des fichiers dans le dossier de config
 COPY sip.conf /etc/asterisk/sip.conf
+COPY users.conf /etc/asterisk/users.conf
 COPY extensions.conf /etc/asterisk/extensions.conf
 COPY voicemail.conf /etc/asterisk/voicemail.conf
+COPY asterisk.conf /etc/asterisk/asterisk.conf
 COPY features.conf /etc/asterisk/features.conf
-COPY asterisk.conf /etc/fail2ban/filter.d/asterisk.conf
-EXPOSE 5060/udp
-EXPOSE 5060/tcp
 
 
-#Run asterisk
-CMD ["asterisk", "-f"]
+EXPOSE 5060/tcp 5060/udp
+
+ENTRYPOINT [ "/usr/sbin/asterisk", "-f" ]
