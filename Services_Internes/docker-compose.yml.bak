@@ -54,7 +54,7 @@ services:
                 Dockerfile
         networks: 
             atelier_network:
-                ipv4_address: 192.168.1.2
+                ipv4_address: 192.168.1.1
         container_name:
             poste-atelier
             
