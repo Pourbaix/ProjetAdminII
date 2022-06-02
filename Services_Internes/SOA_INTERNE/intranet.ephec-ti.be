@@ -11,6 +11,6 @@ $TTL 86400
 
 
 ns              IN      A               192.168.0.2
-resolv          IN      A               192.168.0.1 
-db              IN      A               192.168.0.3 
-cloud 			IN 		A				192.168.0.4
+resolv          IN      A               192.168.0.3 
+db              IN      A               192.168.0.5
+samba 			IN 		A				192.168.0.4

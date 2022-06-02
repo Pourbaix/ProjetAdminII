@@ -9,7 +9,7 @@ services:
                 dockerfile
         networks:
             local_network:
-                ipv4_address: 192.168.0.1    
+                ipv4_address: 192.168.0.2    
         volumes:
             - ./SOA_INTERNE/named.conf:/etc/bind/named.conf
  
@@ -78,9 +78,9 @@ services:
                 Dockerfile
         networks: 
             direction_network:
-                ipv4_address: 192.168.5.1
+                ipv4_address: 192.168.5.2
         container_name:
-            poste-secretariat
+            poste-direction
             
     commerciaux:
         build:
@@ -90,7 +90,7 @@ services:
                 Dockerfile
         networks: 
             commerciaux_network:
-                ipv4_address: 192.168.3.1
+                ipv4_address: 192.168.3.2
         container_name:
             poste-commerciaux
             
@@ -102,7 +102,7 @@ services:
                 Dockerfile
         networks: 
             compta_network:
-                ipv4_address: 192.168.2.1
+                ipv4_address: 192.168.2.2
         container_name:
             poste-compta
             
