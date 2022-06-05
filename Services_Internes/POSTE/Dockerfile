@@ -10,6 +10,8 @@ RUN apt-get update \
   nano \
   smbclient\
   net-tools\
-  dnsutils
+  dnsutils \
+  iputils-ping
+  
 
 ENTRYPOINT ["tail", "-f", "/dev/null"]
