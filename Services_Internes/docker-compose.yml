@@ -8,7 +8,7 @@ services:
             dockerfile: 
                 dockerfile
         networks:
-            local_network:
+            main_network:
                 ipv4_address: 192.168.0.2    
         volumes:
             - ./SOA_INTERNE/named.conf:/etc/bind/named.conf
@@ -26,7 +26,7 @@ services:
             - "53:53/tcp"
             - "53:53/udp"
         networks:
-            local_network:
+            main_network:
                 ipv4_address: 192.168.0.3
         volumes:
             - ./RESOLVEUR_INTERNE/named.conf:/etc/bind/named.conf
@@ -42,7 +42,7 @@ services:
             - "139:139"
             - "445:445"
         networks:
-            local_network:
+            main_network:
                 ipv4_address: 192.168.0.4
         container_name:
             partage-samba
@@ -53,8 +53,8 @@ services:
             dockerfile:
                 Dockerfile
         networks: 
-            atelier_network:
-                ipv4_address: 192.168.1.2
+            main_network:
+                ipv4_address: 192.168.0.5
         container_name:
             poste-atelier
             
@@ -65,8 +65,8 @@ services:
             dockerfile:
                 Dockerfile
         networks: 
-            secretariat_network:
-                ipv4_address: 192.168.4.2
+            main_network:
+                ipv4_address: 192.168.0.6
         container_name:
             poste-secretariat
                 
@@ -77,8 +77,8 @@ services:
             dockerfile:
                 Dockerfile
         networks: 
-            direction_network:
-                ipv4_address: 192.168.5.2
+            main_network:
+                ipv4_address: 192.168.0.7
         container_name:
             poste-direction
             
@@ -89,8 +89,8 @@ services:
             dockerfile:
                 Dockerfile
         networks: 
-            commerciaux_network:
-                ipv4_address: 192.168.3.2
+            main_network:
+                ipv4_address: 192.168.0.8
         container_name:
             poste-commerciaux
             
@@ -101,39 +101,15 @@ services:
             dockerfile:
                 Dockerfile
         networks: 
-            compta_network:
-                ipv4_address: 192.168.2.2
+            main_network:
+                ipv4_address: 192.168.0.9
         container_name:
             poste-compta
             
 networks:
-  local_network:
+  main_network:
     ipam:
       driver: default
       config:
         - subnet: 192.168.0.0/24
-  direction_network:
-    ipam:
-      driver: default
-      config:
-        - subnet: 192.168.5.0/24
-  atelier_network:
-    ipam:
-      driver: default
-      config:
-        - subnet: 192.168.1.0/24
-  compta_network:
-    ipam:
-      driver: default
-      config:
-        - subnet: 192.168.2.0/24
-  commerciaux_network:
-    ipam:
-      driver: default
-      config:
-        - subnet: 192.168.3.0/24
-  secretariat_network:
-    ipam:
-      driver: default
-      config:
-        - subnet: 192.168.4.0/24
+  
