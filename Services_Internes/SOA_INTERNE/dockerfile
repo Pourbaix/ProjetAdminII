@@ -17,8 +17,8 @@ COPY 0.168.192.in-addr.arpa /etc/bind
 COPY resolv.conf /etc
 
 # IMPORTANT : Exposer les ports qui sont nécessaires au bon fonctionnement du service
-EXPOSE 53/TCP
-EXPOSE 53/UDP
+# EXPOSE 53/TCP
+# EXPOSE 53/UDP
 
 # Pour finir, on lance notre serveur SOA INTERNE
 CMD named -g

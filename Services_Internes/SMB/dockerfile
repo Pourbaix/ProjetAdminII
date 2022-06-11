@@ -34,8 +34,8 @@ RUN echo adminabc | pdbedit -a smbadmin & echo adminabc
 COPY smb.conf /etc/samba
 
 # IMPORTANT : Exposer les ports qui sont nécessaires au bon fonctionnement du cloud
-EXPOSE 445/TCP
-EXPOSE 139/TCP
+# EXPOSE 445/TCP
+# EXPOSE 139/TCP
 
 # On restart le service samba pour appliquer les modifs
 # CMD service smbd restart 

@@ -38,9 +38,6 @@ services:
                 ./SMB
             dockerfile:
                 dockerfile
-        ports:
-            - "139:139"
-            - "445:445"
         networks:
             main_network:
                 ipv4_address: 192.168.0.4
