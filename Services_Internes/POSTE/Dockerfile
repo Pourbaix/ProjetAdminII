@@ -10,7 +10,6 @@ RUN apt-get update \
   nano \
   smbclient\
   net-tools\
-  dnsutils \
   iputils-ping
   
 
