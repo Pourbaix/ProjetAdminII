@@ -11,7 +11,7 @@ RUN apt-get update \
   iputils-ping
   
 # On va copier le fichier de config créé dans l'image 
-# COPY squid.conf /etc/squid
+COPY squid.conf /etc/squid
 
 # Pour finir, on lance notre serveur Proxy
 # CMD service squid start 
